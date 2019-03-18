@@ -5,8 +5,93 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:lab3"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="MainWindow" Height="482" Width="800">
+    <Grid ShowGridLines="True" Height="451" VerticalAlignment="Top">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="27*"/>
+            <RowDefinition Height="398*" />
+            <RowDefinition Height="26*"/>
+        </Grid.RowDefinitions>
+
+        <Menu x:Name="menu" Background="#FFCFD6E5" Padding="10 0 10 0" Height="25" VerticalAlignment="Top">
+            <MenuItem Header="Файл">
+                <MenuItem Header="Новый файл" Click="newFile" />
+                <MenuItem Header="Сохранить файл" Click="Save_Click"/>
+                <MenuItem Header="Открыть файл" Click="Load_Click"/>
+            </MenuItem>
+
+            <MenuItem Header="Редактировать">
+                <MenuItem x:Name="Copy" Header="Копировать" Click="Click_Copy"/>
+                <MenuItem x:Name="Insert" Header="Вставить" Click="Click_Insert"/>
+                <MenuItem x:Name="Cut" Header="Вырезать" Click="Click_Cut"/>
+            </MenuItem>
+
+            <MenuItem Click="newFile" Width="25" Height="25" Background="#FFCFD6E5" RenderTransformOrigin="-1.4,0.6" >
+                <MenuItem.Icon>
+                    <Image Source="new.png" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                </MenuItem.Icon>
+
+                <MenuItem.ToolTip>
+                    <ToolTip Content="Создать новый файл"/>
+                </MenuItem.ToolTip>
+            </MenuItem>
+
+            <MenuItem Click="Save_Click" Width="25" Height="25" Background="#FFCFD6E5" >
+                <MenuItem.Icon>
+                    <Image Source="save.png" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                </MenuItem.Icon>
+
+                <MenuItem.ToolTip>
+                    <ToolTip Content="Сохранить файл"/>
+                </MenuItem.ToolTip>
+
+            </MenuItem>
+
+            <MenuItem  Width="25" Height="25" Background="#FFCFD6E5" Click="Load_Click">
+                <MenuItem.Icon>
+                    <Image Source="open.png" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                </MenuItem.Icon>
+                <MenuItem.ToolTip>
+                    <ToolTip Content="Открыть файл"/>
+                </MenuItem.ToolTip>
+            </MenuItem>
+
+            <ComboBox x:Name="FontFamilyComb" HorizontalAlignment="Left" VerticalAlignment="Top" Width="130" Height="20" ItemsSource="{Binding Source={x:Static Fonts.SystemFontFamilies}}" />
+            <!--SelectionChanged="FontFamilyComb_SelectionChanged"-->
+            <ComboBox x:Name="TextSize" HorizontalAlignment="Left" VerticalAlignment="Top" Width="95" Height="20" SelectionChanged="TS_SelectionChanged" Text="20"/>
+            <Separator/>
+
+            <ToggleButton Width="25" Height="20" Background="#FFCFD6E5" Click="Button_Click">
+                <TextBlock FontWeight="Bold"><Run Text="B"/></TextBlock>
+            </ToggleButton>
+
+            <ToggleButton Width="25" Height="20" Background="#FFCFD6E5" Click="Button_Click_1">
+                <TextBlock FontStyle="Italic"><Run Text="I"/></TextBlock>
+            </ToggleButton>
+
+            <ToggleButton Width="25" Height="20" Background="#FFCFD6E5" Click="Button_Click_2">
+                <TextBlock TextDecorations="Underline"><Run Text="U"/></TextBlock>
+            </ToggleButton>
+            <Separator/>
+            <Button x:Name="ColorButton" Width="25" Click="ColorCheng" Height="20" Background="Black" />
+
+        </Menu>
         
+        <RichTextBox x:Name="richTextBox" AcceptsReturn="True" AcceptsTab="True" VerticalScrollBarVisibility="Auto"  SpellCheck.IsEnabled="True" Grid.Row="1" Margin="5,0" AutomationProperties.HelpText="Введите сюда текст" Block.LineHeight="6" FontFamily="Calibri">
+            <RichTextBox.ContextMenu>
+                <ContextMenu>
+                    <MenuItem x:Name="KCopy" Header="Копировать" Click="Click_Copy"/>
+                    <MenuItem x:Name="KInsert" Header="Вставить" Click="Click_Insert"/>
+                    <MenuItem x:Name="KCut" Header="Вырезать" Click="Click_Cut"/>
+                </ContextMenu>
+            </RichTextBox.ContextMenu>
+            <FlowDocument Language="RU"/>
+        </RichTextBox>
+        
+        <StatusBar HorizontalAlignment="Left" Width="787" Grid.Row="2" Margin="0,0,0,-1">
+            <StatusBarItem>
+                <TextBlock Name="lenth" ></TextBlock>
+            </StatusBarItem>
+        </StatusBar>
     </Grid>
 </Window>
